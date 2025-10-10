@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="New Game Project"
+run/main_scene="uid://bujbve2jfrluf"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://Assets/icon.svg"
+
+[autoload]
+
+GameVariables="*res://Scripts/game_variables.gd"
 
 [rendering]
 
