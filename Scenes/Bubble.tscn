@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://bujbve2jfrluf"]
+
+[ext_resource type="Script" uid="uid://c5x57p68wteyp" path="res://Scripts/bubble_controller.gd" id="1_fy1yr"]
+[ext_resource type="Shader" uid="uid://6p6r8lrne245" path="res://Shaders/Bubble.gdshader" id="1_xlgdi"]
+[ext_resource type="Texture2D" uid="uid://et1ioo64wp35" path="res://Assets/ColorfulNoise.png" id="2_fu81w"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xlgdi"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xlgdi"]
+noise = SubResource("FastNoiseLite_xlgdi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fy1yr"]
+render_priority = 0
+shader = ExtResource("1_xlgdi")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_xlgdi")
+shader_parameter/color = ExtResource("2_fu81w")
+shader_parameter/smoothness = 1.0
+shader_parameter/displacement_strength = 0.009999999747
+shader_parameter/fresnel_power = 1.10000001639132
+
+[sub_resource type="SphereMesh" id="SphereMesh_fy1yr"]
+radius = 0.015
+height = 0.03
+
+[node name="Bubble" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_fy1yr")
+mesh = SubResource("SphereMesh_fy1yr")
+script = ExtResource("1_fy1yr")
+
+[node name="KillerTimer" type="Timer" parent="."]

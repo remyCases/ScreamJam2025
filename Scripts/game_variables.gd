@@ -7,3 +7,6 @@ func _ready() -> void:
 
 func get_time_ms() -> int:
 	return Time.get_ticks_msec() - time_engine_start
+
+func get_time_s() -> float:
+	return (Time.get_ticks_msec() - time_engine_start) / 1000.0

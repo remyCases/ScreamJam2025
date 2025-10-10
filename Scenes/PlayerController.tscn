@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b67iksg05so0w"]
+
+[ext_resource type="Script" uid="uid://bdfntnma5mxf5" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
+[ext_resource type="Script" uid="uid://b1f4kkusvq1v8" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
+[ext_resource type="Script" uid="uid://cocxcfa4bhxf" path="res://Scripts/sanity_controller.gd" id="3_crrsd"]
+[ext_resource type="Script" uid="uid://bvuywqmmp4yoi" path="res://Scripts/bubble_spawner.gd" id="3_rrwoe"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eplni"]
+
+[node name="PlayerController" type="CharacterBody3D"]
+script = ExtResource("1_3dbmw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_eplni")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5548068, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="FootstepTimer" type="Timer" parent="."]
+
+[node name="OxygenController" type="Node" parent="."]
+script = ExtResource("2_eplni")
+
+[node name="OxygenDepletionEventTimer" type="Timer" parent="OxygenController"]
+
+[node name="BubbleSpawner" type="Node" parent="OxygenController"]
+script = ExtResource("3_rrwoe")
+
+[node name="SanityController" type="Node" parent="."]
+script = ExtResource("3_crrsd")
