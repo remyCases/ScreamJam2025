@@ -23,6 +23,13 @@ extends CharacterBody3D
 @export var momentum_factor: float = 0.3  # Maintains some momentum
 @export var footstep_interval: float = 1.2  # Time between footstep sounds
 
+# Movement limitation
+@export_group("Movement Limitation")
+@export var maximal_distance_anchor: float
+@export var anchor: Node3D
+@export var alpha_tolerance: float = 0.15
+@onready var tolerance: float = cos(alpha_tolerance)
+
 # Node references
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/Camera3D
@@ -117,6 +124,21 @@ func _handle_movement(delta: float) -> void:
 	is_moving = direction.length() > 0.1
 	
 	if is_moving:
+		
+		# check which direction are allowed if too far from anchor
+		var distance_anchor = position.distance_to(anchor.position)
+		if distance_anchor > maximal_distance_anchor:
+			var anchor_player_vector = position - anchor.position
+			anchor_player_vector.y = 0
+			var normal_vector = anchor_player_vector.normalized()
+			var dot = direction.dot(normal_vector)
+
+			if dot + tolerance > 0:
+				# remove outward component and tangeantial movement with a set angle
+				direction = direction - normal_vector * (dot + tolerance)
+				direction.y = 0
+				direction = direction.normalized()
+
 		# Apply heavy acceleration with momentum
 		var target_velocity = direction * walk_speed
 		momentum_velocity = momentum_velocity.lerp(target_velocity, delta * acceleration)

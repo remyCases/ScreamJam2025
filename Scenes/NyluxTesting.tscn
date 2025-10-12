@@ -44,7 +44,11 @@ shape = SubResource("BoxShape3D_swjv7")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
 mesh = SubResource("BoxMesh_yggig")
 
-[node name="PlayerController" parent="." instance=ExtResource("1_yggig")]
+[node name="PlayerController" parent="." node_paths=PackedStringArray("anchor") instance=ExtResource("1_yggig")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8770303, 0)
+maximal_distance_anchor = 5.0
+anchor = NodePath("../Anchor")
 
 [node name="FpsCounter" parent="." instance=ExtResource("3_ll5sv")]
+
+[node name="Anchor" type="Node3D" parent="."]
