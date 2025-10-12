@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://b67iksg05so0w"]
 
-[ext_resource type="Script" uid="uid://bdfntnma5mxf5" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
-[ext_resource type="Script" uid="uid://b1f4kkusvq1v8" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
-[ext_resource type="Script" uid="uid://cocxcfa4bhxf" path="res://Scripts/sanity_controller.gd" id="3_crrsd"]
-[ext_resource type="Script" uid="uid://bvuywqmmp4yoi" path="res://Scripts/bubble_spawner.gd" id="3_rrwoe"]
+[ext_resource type="Script" uid="uid://dhn6t431rxm8v" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
+[ext_resource type="Script" uid="uid://cg41aavmxdf5g" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
+[ext_resource type="Script" uid="uid://c5vqm7o0vh6ls" path="res://Scripts/sanity_controller.gd" id="3_crrsd"]
+[ext_resource type="Script" uid="uid://bi5etlafjjjoe" path="res://Scripts/bubble_spawner.gd" id="3_rrwoe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eplni"]
 
@@ -17,6 +17,12 @@ shape = SubResource("CapsuleShape3D_eplni")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5548068, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5548068, 0)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 71.44836
 
 [node name="FootstepTimer" type="Timer" parent="."]
 

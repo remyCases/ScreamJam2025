@@ -2,11 +2,11 @@ extends CharacterBody3D
 
 # Movement Settings
 @export_group("Movement")
-@export var walk_speed: float = 3  # Very slow underwater walk
+@export var walk_speed: float = 10.0  # Very slow underwater walk
 @export var acceleration: float = 2.0  # Sluggish acceleration
 @export var friction: float = 3.0  # Water resistance
 @export var gravity: float = 4.0  # Reduced gravity underwater
-@export var buoyancy: float = 2.0  # Slight upward force
+@export var buoyancy: float = 0.5  # Slight upward force
 
 # Mouse Settings
 @export_group("Camera")
@@ -14,7 +14,7 @@ extends CharacterBody3D
 @export var mouse_smoothing: float = 2.0 # Lower = More smoothing
 @export var vertical_look_limit: float = 60.0
 @export var head_bob_frequency: float = 2.0
-@export var head_bob_amplitude: float = 0.055
+@export var head_bob_amplitude: float = 0.075
 @export var camera_sway_amount: float = 0.02
 
 # Underwater effects
@@ -177,7 +177,7 @@ func _update_camera_effects(delta: float) -> void:
 		head_bob_time = 0.0
 	
 	# Add subtle breathing motion even when still
-	var breathing = sin(GameVariables.get_time_ms() * 0.001) * 0.005
+	var breathing = sin(GameVariables.get_time_ms() * 0.001) * 0.002
 	camera.position.y += breathing
 
 

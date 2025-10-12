@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="ScreamJam2025"
-run/main_scene="uid://c7i6p4cgehkgs"
+run/main_scene="uid://sufrrjeq0dml"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://Assets/icon.svg"
 
 [autoload]
 
 GameVariables="*res://Scripts/game_variables.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
 
 [input]
 

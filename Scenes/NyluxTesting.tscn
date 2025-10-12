@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c7i6p4cgehkgs"]
 
-[ext_resource type="Texture2D" uid="uid://bj678oukfggp8" path="res://Assets/grass_6.png" id="1_h702o"]
+[ext_resource type="Texture2D" uid="uid://bj678oukfggp8" path="res://Assets/Textures/grass_6.png" id="1_h702o"]
 [ext_resource type="PackedScene" uid="uid://b67iksg05so0w" path="res://Scenes/PlayerController.tscn" id="1_yggig"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yggig"]
