@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b67iksg05so0w"]
+[gd_scene load_steps=9 format=3 uid="uid://b67iksg05so0w"]
 
-[ext_resource type="Script" uid="uid://bdfntnma5mxf5" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
-[ext_resource type="Script" uid="uid://b1f4kkusvq1v8" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
-[ext_resource type="Script" uid="uid://cocxcfa4bhxf" path="res://Scripts/sanity_controller.gd" id="3_crrsd"]
-[ext_resource type="Script" uid="uid://bvuywqmmp4yoi" path="res://Scripts/bubble_spawner.gd" id="3_rrwoe"]
+[ext_resource type="Script" uid="uid://dhn6t431rxm8v" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
+[ext_resource type="Script" uid="uid://cg41aavmxdf5g" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
+[ext_resource type="Script" uid="uid://c5vqm7o0vh6ls" path="res://Scripts/sanity_controller.gd" id="3_crrsd"]
+[ext_resource type="Script" uid="uid://bi5etlafjjjoe" path="res://Scripts/bubble_spawner.gd" id="3_rrwoe"]
+[ext_resource type="AudioStream" uid="uid://d2u37b3dgvymd" path="res://Sound/mask_breath_in.mp3" id="4_n0rdu"]
+[ext_resource type="AudioStream" uid="uid://cbhd83c3r1bhs" path="res://Sound/underwater-ambiencewav-14428.mp3" id="5_a8u7r"]
+[ext_resource type="AudioStream" uid="uid://b2o3m340go4w4" path="res://Sound/mask_breath_out.mp3" id="5_e25u2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eplni"]
 
@@ -18,15 +21,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5548068, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5548068, 0)
+light_energy = 5.0
+shadow_enabled = true
+spot_range = 71.44836
+
 [node name="FootstepTimer" type="Timer" parent="."]
 
 [node name="OxygenController" type="Node" parent="."]
 script = ExtResource("2_eplni")
+rate_oxygen_natural_depletion = 2
+oxygen_depletion_interval_event = 4.0
 
 [node name="OxygenDepletionEventTimer" type="Timer" parent="OxygenController"]
 
 [node name="BubbleSpawner" type="Node" parent="OxygenController"]
 script = ExtResource("3_rrwoe")
 
+[node name="BreathInSound" type="AudioStreamPlayer" parent="OxygenController"]
+stream = ExtResource("4_n0rdu")
+volume_db = -8.748
+
+[node name="BreathOutSound" type="AudioStreamPlayer" parent="OxygenController"]
+stream = ExtResource("5_e25u2")
+volume_db = -8.748
+
 [node name="SanityController" type="Node" parent="."]
 script = ExtResource("3_crrsd")
+
+[node name="AmbienceWater" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_a8u7r")
+volume_db = -13.608
+autoplay = true
+parameters/looping = false

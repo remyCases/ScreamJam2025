@@ -1,0 +1,371 @@
+[gd_scene load_steps=36 format=3 uid="uid://sufrrjeq0dml"]
+
+[ext_resource type="PackedScene" uid="uid://b67iksg05so0w" path="res://Scenes/PlayerController.tscn" id="1_mb4yd"]
+[ext_resource type="Shader" uid="uid://b12u0l0m46edx" path="res://Shaders/PSX.gdshader" id="1_r0dvh"]
+[ext_resource type="Texture2D" uid="uid://dedpvr3v3by1y" path="res://Assets/Textures/Ground016/Ground016_alb_ht.dds" id="2_b4i3f"]
+[ext_resource type="Texture2D" uid="uid://cs6fgamto4jcb" path="res://Assets/Textures/Ground016/Ground016_nrm_rgh.dds" id="3_ds4jl"]
+[ext_resource type="Texture2D" uid="uid://cbhefixmapcvo" path="res://Assets/Textures/Ground009/Ground009_alb_ht_ao.dds" id="4_1vqdi"]
+[ext_resource type="Texture2D" uid="uid://ba3ruyeo71wnv" path="res://Assets/Textures/Ground009/Ground009_nrm_rgh.dds" id="5_72t8k"]
+[ext_resource type="Texture2D" uid="uid://ceap7j355pyom" path="res://Assets/Textures/Rocks019/rocks019_alb_ht.dds" id="6_rqof6"]
+[ext_resource type="PackedScene" uid="uid://cjrqr2ughfwuf" path="res://Assets/Algae/Algae_02/algae_02.glb" id="7_2vwkk"]
+[ext_resource type="Texture2D" uid="uid://bqhj57crhbdnr" path="res://Assets/Textures/Rocks019/rocks019_nrm_rgh.dds" id="7_kn0ei"]
+[ext_resource type="PackedScene" uid="uid://ctny61sk62gti" path="res://Assets/Algae/Alggae_03/algae_03.glb" id="8_lckee"]
+[ext_resource type="Texture2D" uid="uid://cwcn1pkmotq0h" path="res://Assets/Textures/Moss02/moss02_alb_ht.dds" id="8_tgweh"]
+[ext_resource type="PackedScene" uid="uid://ygciew4ayatn" path="res://Assets/Algae/Kelp_01/kelp_01.glb" id="9_8koth"]
+[ext_resource type="Texture2D" uid="uid://d35m7dut8iv83" path="res://Assets/Textures/Moss02/moss02_nrm_rgh.dds" id="9_a0mo5"]
+[ext_resource type="PackedScene" uid="uid://c00fr064d8gvo" path="res://Assets/Coral/Coral_01/low_poly_red_coral.glb" id="10_i85cs"]
+[ext_resource type="Texture2D" uid="uid://bunsjkv7gtuxc" path="res://Assets/Textures/Shells01/shells01_alb_ht.dds" id="10_t3n7s"]
+[ext_resource type="PackedScene" uid="uid://cpltu2wnes6nv" path="res://Assets/Coral/Coral_02/crescent_moon_coral.glb" id="11_cqkdx"]
+[ext_resource type="Texture2D" uid="uid://bqhe30t6inxa2" path="res://Assets/Textures/Shells01/shells01_nrm_rgh.dds" id="11_r0dvh"]
+[ext_resource type="PackedScene" uid="uid://cd4jvfcjw6s3q" path="res://Assets/Rock/mossy_rock.glb" id="12_h0tm8"]
+[ext_resource type="PackedScene" uid="uid://d1jwk13vstmf8" path="res://Assets/Algae/Algae_01/claret_tall_seaweed.glb" id="12_t3n7s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8pmln"]
+shader = ExtResource("1_r0dvh")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 1
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mb4yd"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ro5b7"]
+sky_material = SubResource("ProceduralSkyMaterial_mb4yd")
+
+[sub_resource type="Environment" id="Environment_b4i3f"]
+background_mode = 1
+background_color = Color(0, 0, 0.0627451, 1)
+sky = SubResource("Sky_ro5b7")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.012193847, 0.09690831, 0.23460221, 1)
+fog_light_energy = 0.4
+fog_density = 0.08
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.2
+
+[sub_resource type="Gradient" id="Gradient_mb4yd"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ro5b7"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b4i3f"]
+noise = SubResource("FastNoiseLite_ro5b7")
+color_ramp = SubResource("Gradient_mb4yd")
+seamless = true
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_ds4jl"]
+_shader_parameters = {
+&"bias_distance": 512.0,
+&"blend_sharpness": 0.5,
+&"depth_blur": 0.0,
+&"enable_macro_variation": true,
+&"enable_projection": true,
+&"flat_terrain_normals": false,
+&"macro_variation1": Color(1, 1, 1, 1),
+&"macro_variation2": Color(1, 1, 1, 1),
+&"macro_variation_slope": 0.333,
+&"mipmap_bias": 1.0,
+&"noise1_angle": 0.0,
+&"noise1_offset": Vector2(0.5, 0.5),
+&"noise1_scale": 0.04,
+&"noise2_scale": 0.076,
+&"noise_texture": SubResource("NoiseTexture2D_b4i3f"),
+&"projection_threshold": 0.8
+}
+world_background = 0
+texture_filtering = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72t8k"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_2vwkk"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_72t8k")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_2vwkk"]
+name = "Sand_1"
+albedo_texture = ExtResource("4_1vqdi")
+normal_texture = ExtResource("5_72t8k")
+roughness = 1.0
+uv_scale = 0.5
+detiling_rotation = 0.25
+detiling_shift = 0.25
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_b4i3f"]
+name = "Gravel_1"
+id = 1
+albedo_color = Color(0.6058008, 0.5834107, 0.5362952, 1)
+albedo_texture = ExtResource("2_b4i3f")
+normal_texture = ExtResource("3_ds4jl")
+roughness = 1.0
+uv_scale = 0.5
+detiling_rotation = 0.25
+detiling_shift = 0.25
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_tgweh"]
+name = "Rock_1"
+id = 2
+albedo_color = Color(0.6728177, 0.67107874, 0.705292, 1)
+albedo_texture = ExtResource("6_rqof6")
+normal_texture = ExtResource("7_kn0ei")
+roughness = 1.0
+uv_scale = 0.5
+detiling_rotation = 0.25
+detiling_shift = 0.25
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_t3n7s"]
+name = "Moss_1"
+id = 3
+albedo_texture = ExtResource("8_tgweh")
+normal_texture = ExtResource("9_a0mo5")
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_8pmln"]
+name = "Shells_1"
+id = 4
+albedo_color = Color(0.8008038, 0.7327716, 0.6180673, 1)
+albedo_texture = ExtResource("10_t3n7s")
+normal_texture = ExtResource("11_r0dvh")
+roughness = 0.766
+uv_scale = 0.25
+detiling_rotation = 0.25
+detiling_shift = 0.25
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_2vwkk"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_2vwkk")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_2vwkk"), SubResource("Terrain3DTextureAsset_b4i3f"), SubResource("Terrain3DTextureAsset_tgweh"), SubResource("Terrain3DTextureAsset_t3n7s"), SubResource("Terrain3DTextureAsset_8pmln")])
+
+[node name="Zone1" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_8pmln")
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_b4i3f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.18505457, 0.18756595, 0.3292821, 1)
+light_energy = 0.4
+
+[node name="EditorLight" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+editor_only = true
+
+[node name="PlayerController" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_mb4yd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 129.85263, 8.798171, -128.07367)
+
+[node name="Terrain3D" type="Terrain3D" parent="SubViewportContainer/SubViewport"]
+data_directory = "res://TerrainData"
+material = SubResource("Terrain3DMaterial_ds4jl")
+assets = SubResource("Terrain3DAssets_2vwkk")
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="Flora" type="Node3D" parent="SubViewportContainer/SubViewport/Terrain3D"]
+
+[node name="algae_01_01" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.64255, 7.0700655, -112.82196)
+
+[node name="algae_01_02" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(-0.41910347, 0, 0.9079386, -0.098135546, 0.9941415, -0.04529926, -0.9026194, -0.10808613, -0.41664815, 121.7195, 6.3220997, -42.112434)
+
+[node name="algae_01_03" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(0.25623575, -0.1090389, -0.9604448, 0.028462537, 0.9940374, -0.10525919, 0.9661952, -0.0003655553, 0.25781122, 159.47758, 7.2360096, -87.48997)
+
+[node name="algae_01_04" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(0.4706829, 0.079569586, 0.8787072, -0.07641222, 0.99585915, -0.049247537, -0.8789873, -0.04396393, 0.4748144, 191.20135, 8.065275, -93.26541)
+
+[node name="algae_01_05" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(0.9986457, -0.0014776892, -0.05200613, -0.0052668294, 0.9915899, -0.12931071, 0.05175954, 0.1294095, 0.9902395, 196.53197, 14.523472, -149.38828)
+
+[node name="algae_01_06" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(-0.994798, -0.018350933, -0.100201905, -0.0052668294, 0.9915899, -0.12931071, 0.10173248, -0.12811027, -0.9865284, 152.68294, 6.446697, -157.85555)
+
+[node name="algae_01_07" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(0.746709, 0.08991063, 0.659046, -0.07551278, 0.9958748, -0.050305583, -0.6608508, -0.01220268, 0.75041837, 126.32765, 0.9253471, -174.9061)
+
+[node name="algae_01_08" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(-0.07514868, -0.14187351, -0.9870281, -0.040635124, 0.9894403, -0.13912642, 0.99634415, 0.029652772, -0.08012045, 82.47694, 4.2302322, -194.40529)
+
+[node name="algae_01_09" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(0.37871245, 0.085932724, 0.92151624, -0.086382926, 0.99461585, -0.057248797, -0.9214747, -0.057922337, 0.3840967, 90.33886, 9.783482, -100.54904)
+
+[node name="algae_01_10" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("12_t3n7s")]
+transform = Transform3D(0.32128942, -0.08579542, -0.94308656, 0.10197513, 0.99323094, -0.055616435, 0.94147474, -0.07830244, 0.32786313, 169.67468, 6.9210243, -125.14715)
+
+[node name="algae_02_01" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("7_2vwkk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 149.27405, 4.6767783, -135.46867)
+
+[node name="algae_02_02" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("7_2vwkk")]
+transform = Transform3D(-0.4156079, -0.14343892, -0.89816225, -0.09413714, 0.98896676, -0.11438042, 0.90465933, 0.03701304, -0.42452532, 171.36676, 5.973146, -81.47293)
+
+[node name="algae_02_03" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("7_2vwkk")]
+transform = Transform3D(0.97595614, 0.019519215, -0.21709155, -0.0011484347, 0.9964288, 0.084428124, 0.21796416, -0.08214884, 0.97249323, 164.98068, 3.4276614, -115.59175)
+
+[node name="algae_02_04" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("7_2vwkk")]
+transform = Transform3D(-0.7894583, 0.09477473, -0.6064435, 0.2164777, 0.9675125, -0.13060464, 0.5743637, -0.2343883, -0.78432703, 106.263596, 1.2599411, -73.22029)
+
+[node name="algae_02_05" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("7_2vwkk")]
+transform = Transform3D(-0.6987096, -0.12435618, -0.70451444, -0.09834104, 0.99212325, -0.07759221, 0.7086143, 0.015068218, -0.7054351, 166.45949, 5.0362115, -190.62128)
+
+[node name="algae_02_06" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("7_2vwkk")]
+transform = Transform3D(-0.0852604, -0.122789, -0.9887636, -0.21818043, 0.97059286, -0.10171895, 0.972177, 0.20705627, -0.10954328, 95.4483, 0.44737792, -190.5871)
+
+[node name="algae_02_07" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("7_2vwkk")]
+transform = Transform3D(-0.9948684, 0, -0.10117774, 0.012889402, 0.991852, -0.12673977, 0.10035348, -0.12739351, -0.9867623, 114.769714, 0.3438896, -141.07037)
+
+[node name="algae_03_01" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("8_lckee")]
+transform = Transform3D(1, 0, 0, 0, 0.9857682, 0.1681109, 0, -0.1681109, 0.9857682, 104.7437, 5.0265355, -127.6746)
+
+[node name="algae_03_02" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("8_lckee")]
+transform = Transform3D(-0.05031126, -0.14992823, -0.98741585, -0.013307273, 0.98868096, -0.1494421, 0.99864495, 0.005621165, -0.051736884, 179.38774, 5.332697, -136.25854)
+
+[node name="algae_03_03" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("8_lckee")]
+transform = Transform3D(-0.93665403, 0.21676368, 0.27512288, 0.24698673, 0.965711, 0.08000147, -0.24834779, 0.1428853, -0.9580746, 147.283, 5.5496573, -99.44199)
+
+[node name="algae_03_04" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("8_lckee")]
+transform = Transform3D(0.9972448, -0.074178115, 0, 0.074178085, 0.9972452, 0, 0, 0, 0.99999976, 139.3918, -1.3083882, -178.66705)
+
+[node name="algae_03_05" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("8_lckee")]
+transform = Transform3D(0.024935428, -0.16934645, 0.9852408, 0.073134534, 0.98321587, 0.1671473, -0.99701005, 0.06788731, 0.03690198, 186.48068, 7.279059, -178.66705)
+
+[node name="algae_03_06" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("8_lckee")]
+transform = Transform3D(-0.960622, 0.024400502, 0.27678424, 0.07313454, 0.98321587, 0.1671473, -0.26806012, 0.18080795, -0.9462831, 186.48068, 7.145148, -82.94084)
+
+[node name="algae_03_07" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("8_lckee")]
+transform = Transform3D(0.37778476, 0.12779525, -0.91703147, -0.1256357, 0.9883445, 0.08597574, 0.9173299, 0.082731694, 0.38943663, 96.01519, 3.5064073, -82.94084)
+
+[node name="kelp_01" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.9985983, -0.052928545, 0, 0.052928545, 0.9985983, 0, 0, 0, 1, 61.14155, 4.6779327, -107.25269)
+
+[node name="kelp_02" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.9125149, 0.054043964, -0.40545753, -0.049388096, 0.99853855, 0.021944601, 0.40605095, 0, 0.9138505, 72.69693, -12.646662, -82.39345)
+
+[node name="kelp_03" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.7342633, -1.8602366e-09, 0.67886484, -0.051668365, 0.99709934, 0.05588474, -0.6768957, -0.076109946, 0.7321335, 72.69693, -12.646662, -94.02437)
+
+[node name="kelp_04" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(-0.85247606, 0, -0.5227666, 0, 1, 0, 0.5227666, 0, -0.85247606, 48.626297, -0.068834305, -91.50491)
+
+[node name="kelp_05" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.14314708, 0, -0.98970133, 0, 1, 0, 0.98970133, 0, 0.14314708, 58.208763, -0.068834305, -84.9129)
+
+[node name="kelp_06" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(-0.80006176, 0, -0.59991765, -0.04203615, 0.9975421, 0.05606022, 0.5984431, 0.070069864, -0.7980953, 83.63253, 3.9143639, -112.380936)
+
+[node name="kelp_07" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(-0.78257555, 0, 0.6225556, 0, 1, 0, -0.6225556, 0, -0.78257555, 59.47401, 3.9143639, -125.33758)
+
+[node name="kelp_08" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.7445795, 0, -0.66753364, 0, 1, 0, 0.66753364, 0, 0.7445795, 66.4516, -13.642956, -116.03213)
+
+[node name="kelp_09" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.3684165, 0, 0.92966086, 0, 1, 0, -0.92966086, 0, 0.3684165, 84.198135, -0.068834305, -132.48822)
+
+[node name="kelp_10" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(-0.07034844, 0, 0.9975224, -0.039684437, 0.99920833, -0.0027986723, -0.9967327, -0.039783005, -0.07029275, 72.576904, -10.851864, -132.01355)
+
+[node name="kelp_11" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.9954576, 0.039292566, -0.08672389, -0.039684463, 0.9992089, -0.0027986777, 0.08654513, 0.0062275496, 0.99622846, 185.12802, -21.543314, -132.01355)
+
+[node name="kelp_12" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.92723703, 0.03578196, -0.37276256, -0.039684467, 0.99920905, -0.002798678, 0.37236735, 0.017387912, 0.92792267, 161.53871, -15.76116, -68.63677)
+
+[node name="kelp_13" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.62935895, 0.09444251, -0.77135473, -0.014487132, 0.99384165, 0.10986279, 0.7769801, -0.057968482, 0.62685055, 184.54424, -1.1107693, -203.37332)
+
+[node name="kelp_14" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.94432247, 0.021370279, 0.32832626, 0.0092258565, 0.9957764, -0.09134858, -0.32889214, 0.08929159, 0.94013655, 112.46424, -24.992243, -168.17285)
+
+[node name="kelp_15" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(-0.027438853, 0.09157014, 0.9954203, 0.1636399, 0.9827737, -0.08589609, -0.9861389, 0.16053359, -0.04195024, 116.76863, -4.5991974, -229.38628)
+
+[node name="kelp_16" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(-0.9134, -0.032665167, -0.4057512, -0.007340937, 0.9979352, -0.06381371, 0.4069984, -0.05530873, -0.9117529, 125.175735, -4.599209, -80.34852)
+
+[node name="kelp_17" parent="SubViewportContainer/SubViewport/Terrain3D/Flora" instance=ExtResource("9_8koth")]
+transform = Transform3D(0.64972395, -0.04374959, -0.75891054, -0.007340935, 0.9979352, -0.06381371, 0.7601354, 0.04703234, 0.6480602, 154.30515, -15.096767, -148.88913)
+
+[node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport/Terrain3D"]
+
+[node name="coral_01_01" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("10_i85cs")]
+transform = Transform3D(-0.6278154, -0.0009086719, -0.77836186, 0.039635185, 0.99866456, -0.033135027, 0.7773525, -0.05165319, -0.62694085, 105.21193, 4.4769306, -116.157234)
+
+[node name="coral_01_02" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("10_i85cs")]
+transform = Transform3D(0.6472717, -0.17452197, -0.74201155, -0.033209193, 0.96605676, -0.25618666, 0.7615355, 0.19046393, 0.61950535, 146.26707, -0.086205006, -190.35056)
+
+[node name="coral_01_03" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("10_i85cs")]
+transform = Transform3D(-0.7951858, -0.0015992783, -0.60636306, 0.08310603, 0.99027294, -0.111597575, 0.6006435, -0.1391333, -0.7873175, 178.24527, 3.1582747, -97.092834)
+
+[node name="coral_01_04" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("10_i85cs")]
+transform = Transform3D(0.88654286, -0.34958425, -0.3030394, 0.4471849, 0.81542194, 0.3675771, 0.11860552, -0.46138823, 0.8792346, 143.83899, 3.3408298, -43.39003)
+
+[node name="coral_02_01" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("11_cqkdx")]
+transform = Transform3D(-0.49645233, -0.035300687, -0.8673459, -0.017536042, 0.9993769, -0.030636994, 0.86788684, 4.413156e-09, -0.49676186, 180.22594, 3.9712849, -153.2539)
+
+[node name="coral_02_02" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("11_cqkdx")]
+transform = Transform3D(-0.13132279, -0.09148428, 0.9871093, -0.15223034, 0.98578376, 0.071109004, -0.9795816, -0.14092979, -0.14338252, 194.35852, 10.274253, -63.698547)
+
+[node name="coral_02_03" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("11_cqkdx")]
+transform = Transform3D(-0.6330837, -0.113167875, 0.76576626, -0.07892324, 0.9935371, 0.08158019, -0.77004963, -0.008789729, -0.6379236, 91.173294, 7.512623, -41.298035)
+
+[node name="rock_01_01" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(-0.78392106, 1.0126824e-08, -0.6208607, -0.08685777, 0.9901658, 0.10966976, 0.614755, 0.139899, -0.7762118, 104.40368, 1.4847498, -94.41378)
+
+[node name="rock_01_02" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(0.81283003, -0.2302664, 0.53505564, 0.11141312, 0.9630484, 0.24520385, -0.5717465, -0.1396969, 0.8084495, 168.24393, 4.375695, -139.79556)
+
+[node name="rock_01_03" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(0.5747237, 0.5482852, 0.6075161, 0.5300908, -0.81499684, 0.23405945, 0.6234548, 0.18751925, -0.75903916, 127.4395, -1.7559805, -54.612442)
+
+[node name="rock_01_04" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(-0.40583932, 0.1884005, -0.8943155, -0.91394424, -0.08318711, 0.39722246, 0.0004413575, 0.9785628, 0.20594817, 171.50778, 4.7991934, -98.78366)
+
+[node name="rock_01_05" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(0.806592, -0.3797003, -0.45303136, -0.07334683, 0.6961965, -0.7140943, 0.58654046, 0.6092106, 0.5336968, 125.12113, 0.37951756, -191.33292)
+
+[node name="rock_01_06" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(-0.6453545, -0.5221522, -0.55756116, 0.6532874, -0.75554943, -0.048586518, -0.39589542, -0.3956028, 0.8287132, 218.34076, 2.2506933, -192.30695)
+
+[node name="rock_01_07" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(-0.2866165, 0.9485396, -0.1346223, 0.95005846, 0.29951313, 0.08763906, 0.123450436, -0.10278031, -0.9870141, 232.54082, -0.10505104, -84.92264)
+
+[node name="rock_01_08" parent="SubViewportContainer/SubViewport/Terrain3D/Props" instance=ExtResource("12_h0tm8")]
+transform = Transform3D(0.44499508, 0.31417394, 0.83861446, -0.74021477, 0.6561088, 0.14698014, -0.5040449, -0.6861596, 0.5245218, 165.62425, 3.850028, -231.16187)
