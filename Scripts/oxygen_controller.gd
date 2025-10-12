@@ -14,6 +14,9 @@ var rate_oxygen_depletion: int
 
 @onready var oxygen_depletion_event_timer: Timer = $OxygenDepletionEventTimer
 @onready var sanity_controller: Node = $"../SanityController"
+@onready var breath_in: AudioStreamPlayer = $"BreathInSound"
+@onready var breath_out: AudioStreamPlayer = $"BreathOutSound"
+
 
 func _ready() -> void:
 	oxygen_depletion_event_timer.start(oxygen_depletion_interval_event)
@@ -25,6 +28,7 @@ func _depletion_event() -> void:
 	rate_oxygen_depletion = rate_oxygen_natural_depletion + rate_oxygen_sanity_depletion
 
 	current_oxygen -= rate_oxygen_depletion
+	breath_out.play()
 	if current_oxygen < 0:
 		out_of_oxygen.emit()
 		oxygen_depletion_event_timer.stop()
@@ -32,4 +36,4 @@ func _depletion_event() -> void:
 		depletion_event.emit(get_oxygen_level())
 
 func get_oxygen_level() -> int:
-	return min(max_oxygen_level, current_oxygen / 20)
+	return min(max_oxygen_level, current_oxygen / 20.0)
