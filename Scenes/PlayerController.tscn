@@ -54,3 +54,4 @@ script = ExtResource("3_crrsd")
 stream = ExtResource("5_a8u7r")
 volume_db = -13.608
 autoplay = true
+parameters/looping = false
