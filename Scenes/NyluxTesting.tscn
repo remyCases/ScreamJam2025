@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7i6p4cgehkgs"]
+[gd_scene load_steps=10 format=3 uid="uid://c7i6p4cgehkgs"]
 
 [ext_resource type="Texture2D" uid="uid://bj678oukfggp8" path="res://Assets/grass_6.png" id="1_h702o"]
 [ext_resource type="PackedScene" uid="uid://b67iksg05so0w" path="res://Scenes/PlayerController.tscn" id="1_yggig"]
+[ext_resource type="PackedScene" uid="uid://buduq4adhxuy5" path="res://Scenes/FPSCounter.tscn" id="3_ll5sv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yggig"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -45,3 +46,5 @@ mesh = SubResource("BoxMesh_yggig")
 
 [node name="PlayerController" parent="." instance=ExtResource("1_yggig")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8770303, 0)
+
+[node name="FpsCounter" parent="." instance=ExtResource("3_ll5sv")]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://buduq4adhxuy5"]
+
+[ext_resource type="Script" uid="uid://c10ahmgbplc3e" path="res://Scripts/fps_manager.gd" id="1_xa1po"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xa1po"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="FpsCounter" type="CanvasLayer"]
+
+[node name="FpsText" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1152.0
+offset_bottom = 23.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Lorem Ipsum"
+label_settings = SubResource("LabelSettings_xa1po")
+horizontal_alignment = 2
+script = ExtResource("1_xa1po")
