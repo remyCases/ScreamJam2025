@@ -34,6 +34,10 @@ extends CharacterBody3D
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/Camera3D
 @onready var footstep_timer: Timer = $FootstepTimer
+@onready var flashlight: SpotLight3D = $CameraPivot/SpotLight3D
+@onready var flashlight_on_sound: AudioStreamPlayer = $CameraPivot/SpotLight3D/FlashlightToggleOn
+@onready var flashlight_off_sound: AudioStreamPlayer = $CameraPivot/SpotLight3D/FlashlightToggleOff
+@onready var footstep_sound: AudioStreamPlayer = $FootstepTimer/FootstepSound
 
 # Internal variables
 var mouse_delta: Vector2 = Vector2.ZERO
@@ -72,6 +76,15 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_F:
+			if flashlight.visible:
+				flashlight.visible = false
+				flashlight_off_sound.play()
+			else:
+				flashlight.visible = true
+				flashlight_on_sound.play()
 
 
 func _physics_process(delta: float) -> void:
@@ -204,8 +217,8 @@ func _update_camera_effects(delta: float) -> void:
 
 
 func _on_footstep() -> void:
-	# Timer calls this
-	pass
+	if is_on_floor():
+		footstep_sound.play()
 
 func _get_vision_basis() -> Basis:
 	return camera.get_global_transform().basis
