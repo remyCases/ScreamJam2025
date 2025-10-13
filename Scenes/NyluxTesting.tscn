@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7i6p4cgehkgs"]
+[gd_scene load_steps=12 format=3 uid="uid://c7i6p4cgehkgs"]
 
 [ext_resource type="Texture2D" uid="uid://bj678oukfggp8" path="res://Assets/Textures/grass_6.png" id="1_h702o"]
 [ext_resource type="PackedScene" uid="uid://b67iksg05so0w" path="res://Scenes/PlayerController.tscn" id="1_yggig"]
 [ext_resource type="PackedScene" uid="uid://buduq4adhxuy5" path="res://Scenes/FPSCounter.tscn" id="3_ll5sv"]
+[ext_resource type="PackedScene" uid="uid://dpnia7pnlgqet" path="res://Scenes/PseudoPhysicsCable.tscn" id="4_dg07d"]
+[ext_resource type="PackedScene" uid="uid://bdvp4wkarmsuv" path="res://Scenes/CableSegment.tscn" id="5_0kod5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yggig"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -52,3 +54,8 @@ anchor = NodePath("../Anchor")
 [node name="FpsCounter" parent="." instance=ExtResource("3_ll5sv")]
 
 [node name="Anchor" type="Node3D" parent="."]
+
+[node name="PseudoPhysicsCable" parent="." node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("4_dg07d")]
+start_point = NodePath("../Anchor")
+end_point = NodePath("../PlayerController")
+cable_mesh = ExtResource("5_0kod5")

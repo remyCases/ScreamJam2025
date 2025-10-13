@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://sufrrjeq0dml"]
+[gd_scene load_steps=39 format=3 uid="uid://sufrrjeq0dml"]
 
 [ext_resource type="PackedScene" uid="uid://b67iksg05so0w" path="res://Scenes/PlayerController.tscn" id="1_mb4yd"]
 [ext_resource type="Shader" uid="uid://ilmbg5t4h1iu" path="res://Shaders/PSX.gdshader" id="1_r0dvh"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://cd4jvfcjw6s3q" path="res://Assets/Rock/mossy_rock.glb" id="12_h0tm8"]
 [ext_resource type="PackedScene" uid="uid://d1jwk13vstmf8" path="res://Assets/Algae/Algae_01/claret_tall_seaweed.glb" id="12_t3n7s"]
 [ext_resource type="PackedScene" uid="uid://buduq4adhxuy5" path="res://Scenes/FPSCounter.tscn" id="20_8pmln"]
+[ext_resource type="PackedScene" uid="uid://dpnia7pnlgqet" path="res://Scenes/PseudoPhysicsCable.tscn" id="20_ciyxo"]
+[ext_resource type="PackedScene" uid="uid://bdvp4wkarmsuv" path="res://Scenes/CableSegment.tscn" id="21_qp1ui"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8pmln"]
 shader = ExtResource("1_r0dvh")
@@ -373,6 +375,12 @@ transform = Transform3D(-0.2866165, 0.9485396, -0.1346223, 0.95005846, 0.2995131
 transform = Transform3D(0.44499508, 0.31417394, 0.83861446, -0.74021477, 0.6561088, 0.14698014, -0.5040449, -0.6861596, 0.5245218, 165.62425, 3.850028, -231.16187)
 
 [node name="Anchor" type="Node3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, -128)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 8.246847, -128)
+
+[node name="PseudoPhysicsCable" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("20_ciyxo")]
+start_point = NodePath("../Anchor")
+end_point = NodePath("../PlayerController")
+cable_thickness = 0.05
+cable_mesh = ExtResource("21_qp1ui")
 
 [node name="FpsCounter" parent="SubViewportContainer" instance=ExtResource("20_8pmln")]

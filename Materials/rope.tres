@@ -6,3 +6,4 @@
 albedo_texture = ExtResource("1_kph20")
 uv1_scale = Vector3(2, 2, 2)
 uv1_triplanar_sharpness = 150.0
+disable_receive_shadows = true
