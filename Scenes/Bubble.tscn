@@ -25,7 +25,9 @@ height = 0.03
 
 [node name="Bubble" type="MeshInstance3D"]
 material_override = SubResource("ShaderMaterial_fy1yr")
+gi_mode = 0
 mesh = SubResource("SphereMesh_fy1yr")
 script = ExtResource("1_fy1yr")
+bubble_lifetime = 10.0
 
 [node name="KillerTimer" type="Timer" parent="."]

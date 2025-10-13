@@ -27,3 +27,5 @@ func _on_depletion_event(n_bubbles: int) -> void:
 			- vision_basis.z * distance_z\
 			- vision_basis.x * distance_x\
 			- vision_basis.y * distance_y
+		bubble.player_velocity = player_controller.velocity
+		player_controller.velocity_updated.connect(bubble._on_velocity_updated)

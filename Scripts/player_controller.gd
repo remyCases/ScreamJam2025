@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal velocity_updated
+
 # Movement Settings
 @export_group("Movement")
 @export var walk_speed: float = 10.0  # Very slow underwater walk
@@ -45,7 +47,6 @@ var momentum_velocity: Vector3 = Vector3.ZERO
 var sway_velocity: Vector2 = Vector2.ZERO
 var original_camera_pos: Vector3
 
-
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -55,6 +56,11 @@ func _ready() -> void:
 	
 	# Store original camera position for bobbing
 	original_camera_pos = camera.position
+
+	# send velocity message for bubbles
+	$VelocityTimer.timeout.connect(func(): velocity_updated.emit(velocity))
+	$VelocityTimer.one_shot = false
+	$VelocityTimer.start(0.2)
 
 func _input(event: InputEvent) -> void:
 	# Handle mouse input
@@ -73,7 +79,6 @@ func _input(event: InputEvent) -> void:
 		if event.pressed and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-
 func _physics_process(delta: float) -> void:
 	# Only process if mouse is captured
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
@@ -84,7 +89,6 @@ func _physics_process(delta: float) -> void:
 	_apply_underwater_effects(delta)
 	_update_camera_effects(delta)
 	move_and_slide()
-
 
 func _handle_mouse_look(delta: float) -> void:
 	# Apply heavy smoothing to mouse input
@@ -110,7 +114,6 @@ func _handle_mouse_look(delta: float) -> void:
 	# Reset mouse delta
 	mouse_delta = Vector2.ZERO
 
-
 func _handle_movement(delta: float) -> void:
 	# Get input direction
 	var input_dir = Vector2()
@@ -126,18 +129,19 @@ func _handle_movement(delta: float) -> void:
 	if is_moving:
 		
 		# check which direction are allowed if too far from anchor
-		var distance_anchor = position.distance_to(anchor.position)
-		if distance_anchor > maximal_distance_anchor:
-			var anchor_player_vector = position - anchor.position
-			anchor_player_vector.y = 0
-			var normal_vector = anchor_player_vector.normalized()
-			var dot = direction.dot(normal_vector)
+		if anchor != null:
+			var distance_anchor = position.distance_to(anchor.position)
+			if distance_anchor > maximal_distance_anchor:
+				var anchor_player_vector = position - anchor.position
+				anchor_player_vector.y = 0
+				var normal_vector = anchor_player_vector.normalized()
+				var dot = direction.dot(normal_vector)
 
-			if dot + tolerance > 0:
-				# remove outward component and tangeantial movement with a set angle
-				direction = direction - normal_vector * (dot + tolerance)
-				direction.y = 0
-				direction = direction.normalized()
+				if dot + tolerance > 0:
+					# remove outward component and tangeantial movement with a set angle
+					direction = direction - normal_vector * (dot + tolerance)
+					direction.y = 0
+					direction = direction.normalized()
 
 		# Apply heavy acceleration with momentum
 		var target_velocity = direction * walk_speed
