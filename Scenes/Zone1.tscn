@@ -380,7 +380,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 8.246847, -128)
 [node name="PseudoPhysicsCable" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("20_ciyxo")]
 start_point = NodePath("../Anchor")
 end_point = NodePath("../PlayerController")
-cable_thickness = 0.05
+number_of_segments = 20
+cable_thickness = 0.02
 cable_mesh = ExtResource("21_qp1ui")
 
 [node name="FpsCounter" parent="SubViewportContainer" instance=ExtResource("20_8pmln")]
