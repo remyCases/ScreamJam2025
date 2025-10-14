@@ -191,9 +191,10 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 editor_only = true
 
-[node name="PlayerController" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_mb4yd")]
+[node name="PlayerController" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("anchor") instance=ExtResource("1_mb4yd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 129.85263, 8.798171, -128.07367)
-maximal_distance_anchor = 10.0
+maximal_distance_anchor = 64.0
+anchor = NodePath("../../../Anchor")
 
 [node name="Terrain3D" type="Terrain3D" parent="SubViewportContainer/SubViewport"]
 data_directory = "res://TerrainData"
@@ -375,7 +376,7 @@ transform = Transform3D(-0.2866165, 0.9485396, -0.1346223, 0.95005846, 0.2995131
 transform = Transform3D(0.44499508, 0.31417394, 0.83861446, -0.74021477, 0.6561088, 0.14698014, -0.5040449, -0.6861596, 0.5245218, 165.62425, 3.850028, -231.16187)
 
 [node name="Anchor" type="Node3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 8.246847, -128)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 129.564, 9, -128)
 
 [node name="PseudoPhysicsCable" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("20_ciyxo")]
 start_point = NodePath("../Anchor")
