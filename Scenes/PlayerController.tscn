@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b67iksg05so0w"]
+[gd_scene load_steps=13 format=3 uid="uid://b67iksg05so0w"]
 
 [ext_resource type="Script" uid="uid://dhn6t431rxm8v" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
 [ext_resource type="Script" uid="uid://cg41aavmxdf5g" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://d2u37b3dgvymd" path="res://Sound/mask_breath_in.mp3" id="4_n0rdu"]
 [ext_resource type="AudioStream" uid="uid://cbhd83c3r1bhs" path="res://Sound/underwater-ambiencewav-14428.mp3" id="5_a8u7r"]
 [ext_resource type="AudioStream" uid="uid://b2o3m340go4w4" path="res://Sound/mask_breath_out.mp3" id="5_e25u2"]
+[ext_resource type="Texture2D" uid="uid://d3rbf48hv75yk" path="res://Assets/overlay.png" id="11_rt8ni"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eplni"]
 
@@ -39,11 +40,13 @@ stream = ExtResource("3_irtnh")
 volume_db = 3.888
 
 [node name="FootstepTimer" type="Timer" parent="."]
-[node name="VelocityTimer" type="Timer" parent="."]
+
 [node name="FootstepSound" type="AudioStreamPlayer" parent="FootstepTimer"]
 stream = ExtResource("4_irtnh")
 volume_db = -14.58
 pitch_scale = 0.7
+
+[node name="VelocityTimer" type="Timer" parent="."]
 
 [node name="OxygenController" type="Node" parent="."]
 script = ExtResource("2_eplni")
@@ -71,3 +74,21 @@ stream = ExtResource("5_a8u7r")
 volume_db = -13.608
 autoplay = true
 parameters/looping = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_rt8ni")
+expand_mode = 2
