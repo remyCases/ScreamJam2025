@@ -400,6 +400,15 @@ outer_radius = 10.0
 middle_radius = 5.0
 inner_radius = 1.0
 
+[node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.72826, 7, -111.257935)
+size = Vector3(1, 1.0860596, 1)
+
+[node name="CollectibleDetector" parent="SubViewportContainer/SubViewport/CSGBox3D2" instance=ExtResource("22_qp1ui")]
+outer_radius = 10.0
+middle_radius = 5.0
+inner_radius = 1.0
+
 [node name="FpsCounter" parent="SubViewportContainer" instance=ExtResource("20_8pmln")]
 
 [node name="MetalDetectorController" type="Node" parent="SubViewportContainer"]
