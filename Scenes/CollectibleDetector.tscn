@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjp7mmpx6jscj"]
+
+[ext_resource type="Script" uid="uid://clj0t6qoqcx1j" path="res://Scripts/collectible_controller.gd" id="1_88gh4"]
+
+[node name="CollectibleDetector" type="Node3D"]
+script = ExtResource("1_88gh4")

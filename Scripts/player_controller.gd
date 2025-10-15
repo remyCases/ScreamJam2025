@@ -38,7 +38,7 @@ signal velocity_updated
 
 # Breathing animation settings
 @export_group("Breathing Animation")
-@export var breathing_animation_amplitude: float =  0.002
+@export var breathing_animation_amplitude: float =  0.02
 var breathing_animation_pulsation: float
 var breathing_animation_phase: float
 
@@ -64,6 +64,8 @@ var sway_velocity: Vector2 = Vector2.ZERO
 var original_camera_pos: Vector3
 
 func _ready() -> void:
+	collision_layer = 0b00000000_00000000_00000000_00000001
+	collision_mask = 0b00000000_00000000_00000000_00000110
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	# Setup footstep timer
