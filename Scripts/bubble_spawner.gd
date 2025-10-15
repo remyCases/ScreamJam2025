@@ -1,19 +1,21 @@
 extends Node
 
 @onready var bubble_template: PackedScene = load("res://Scenes/Bubble.tscn")
-@onready var oxygen_controller: Node = $".."
-@onready var player_controller: CharacterBody3D = $"../.."
+@onready var oxygen_controller: Node = $"../OxygenController"
+@onready var breathing_controller: Node = $"../BreathingController"
+@onready var player_controller: CharacterBody3D = $".."
 
 @export var spawn_distance_forward: float = 0.2
 @export var spawn_offset_left: Vector2 = Vector2(0.05, 0.15)
 @export var spawn_offset_down: Vector2 = Vector2(0.1, 0.4)
 
 func _ready() -> void:
-	oxygen_controller.depletion_event.connect(_on_depletion_event)
+	breathing_controller.exhaled.connect(_on_exhaled)
 
-func _on_depletion_event(n_bubbles: int) -> void:
+func _on_exhaled() -> void:
 	var vision_basis = player_controller._get_vision_basis()
 	var vision_position = player_controller._get_vision_position()
+	var n_bubbles = oxygen_controller.get_oxygen_level()
 
 	for i in range(n_bubbles):
 		var bubble = bubble_template.instantiate()

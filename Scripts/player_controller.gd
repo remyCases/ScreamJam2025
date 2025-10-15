@@ -32,6 +32,16 @@ signal velocity_updated
 @export var alpha_tolerance: float = 0.15
 @onready var tolerance: float = cos(alpha_tolerance)
 
+# Bubble updates settings
+@export_group("Bubbles Settings")
+@export var time_between_velocity_updates_for_bubbles: float = 0.2
+
+# Breathing animation settings
+@export_group("Breathing Animation")
+@export var breathing_animation_amplitude: float =  0.002
+var breathing_animation_pulsation: float
+var breathing_animation_phase: float
+
 # Node references
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/Camera3D
@@ -40,6 +50,7 @@ signal velocity_updated
 @onready var flashlight_on_sound: AudioStreamPlayer = $CameraPivot/SpotLight3D/FlashlightToggleOn
 @onready var flashlight_off_sound: AudioStreamPlayer = $CameraPivot/SpotLight3D/FlashlightToggleOff
 @onready var footstep_sound: AudioStreamPlayer = $FootstepTimer/FootstepSound
+@onready var breathing_controller: Node = $BreathingController
 
 # Internal variables
 var mouse_delta: Vector2 = Vector2.ZERO
@@ -62,9 +73,15 @@ func _ready() -> void:
 	original_camera_pos = camera.position
 
 	# send velocity message for bubbles
-	$VelocityTimer.timeout.connect(func(): velocity_updated.emit(velocity))
-	$VelocityTimer.one_shot = false
-	$VelocityTimer.start(0.2)
+	var velocity_timer: Timer = Timer.new()
+	velocity_timer.timeout.connect(_on_velocity_timer_timeout)
+	velocity_timer.one_shot = false
+	add_child(velocity_timer)
+	velocity_timer.start(time_between_velocity_updates_for_bubbles)
+
+	# handle breathing animation
+	breathing_controller.exhaled.connect(_on_exhaled)
+	breathing_controller.inhaled.connect(_on_inhaled)
 
 func _input(event: InputEvent) -> void:
 	# Handle mouse input
@@ -214,11 +231,26 @@ func _update_camera_effects(delta: float) -> void:
 		# Return to original position slowly
 		camera.position = camera.position.lerp(original_camera_pos, delta * 2.0)
 		head_bob_time = 0.0
-	
+
 	# Add subtle breathing motion even when still
-	var breathing = sin(GameVariables.get_time_ms() * 0.001) * 0.002
+	var breathing = breathing_animation(GameVariables.get_time_s())
 	camera.position.y += breathing
 
+func breathing_animation(t: float) -> float:
+	if breathing_animation_pulsation != null and breathing_animation_phase != null:
+		return sin(t * breathing_animation_pulsation + breathing_animation_phase) * breathing_animation_amplitude
+	return 0.0
+
+func _on_exhaled() -> void:
+	breathing_animation_pulsation = PI / (breathing_controller.time_after_exhaling * 1000.0)
+	breathing_animation_phase = - PI/ 2 - breathing_animation_pulsation * GameVariables.get_time_s()
+
+func _on_inhaled() -> void:
+	breathing_animation_pulsation = PI / breathing_controller.time_after_inhaling
+	breathing_animation_phase = PI/ 2 - breathing_animation_pulsation * GameVariables.get_time_s()
+
+func _on_velocity_timer_timeout() -> void:
+	velocity_updated.emit(velocity)
 
 func _on_footstep() -> void:
 	if is_on_floor():

@@ -50,7 +50,7 @@ func _transition_on_inhaling() -> void:
 func _on_timer_timeout() -> void:
 	match current_state:
 		BREATHING.EXHALING:
-			_transition_on_exhaling()
+			_transition_on_inhaling()
 		BREATHING.INHALING:
 			_transition_on_exhaling()
 		BREATHING.OFF:

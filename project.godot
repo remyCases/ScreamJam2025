@@ -19,6 +19,11 @@ config/icon="res://Assets/icon.svg"
 
 GameVariables="*res://Scripts/game_variables.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
