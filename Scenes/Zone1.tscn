@@ -419,3 +419,4 @@ pitch_close = 3.0
 
 [node name="MetalDetectorSound" type="AudioStreamPlayer" parent="SubViewportContainer/MetalDetectorController"]
 stream = ExtResource("25_0nj8v")
+volume_db = -10.0
