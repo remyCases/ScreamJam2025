@@ -21,6 +21,7 @@ func create_cylinder_area(area: Area3D, radius: float):
 	var shape = CollisionShape3D.new()
 	shape.shape = CylinderShape3D.new()
 	shape.shape.radius = radius
+	shape.shape.height = 4.0
 	area.add_child(shape)
 
 	# collision layer as collectibles
