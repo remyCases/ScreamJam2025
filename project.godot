@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 GameVariables="*res://Scripts/game_variables.gd"
+Transition="*res://Scenes/Transition.tscn"
 
 [display]
 

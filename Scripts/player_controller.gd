@@ -51,6 +51,7 @@ var breathing_animation_phase: float
 @onready var flashlight_off_sound: AudioStreamPlayer = $CameraPivot/SpotLight3D/FlashlightToggleOff
 @onready var footstep_sound: AudioStreamPlayer = $FootstepTimer/FootstepSound
 @onready var breathing_controller: Node = $BreathingController
+@onready var oxygen_controller: Node = $OxygenController
 
 # Internal variables
 var mouse_delta: Vector2 = Vector2.ZERO
@@ -82,6 +83,9 @@ func _ready() -> void:
 	# handle breathing animation
 	breathing_controller.exhaled.connect(_on_exhaled)
 	breathing_controller.inhaled.connect(_on_inhaled)
+	
+	# handle game over
+	oxygen_controller.out_of_oxygen.connect(_on_out_of_oxygen)
 
 func _input(event: InputEvent) -> void:
 	# Handle mouse input
@@ -261,3 +265,9 @@ func _get_vision_basis() -> Basis:
 
 func _get_vision_position() -> Vector3:
 	return position + camera_pivot.position
+
+func _on_out_of_oxygen() -> void:
+	Transition.transition()
+	await Transition.on_transition_finished
+	## TODO: add the correct scene
+	get_tree().change_scene_to_file("res://Scenes/NyluxTesting.tscn")

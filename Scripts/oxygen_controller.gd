@@ -19,7 +19,6 @@ var rate_oxygen_depletion: int
 func _ready() -> void:
 	breathing_controller.exhaled.connect(_on_exhaled)
 	breathing_controller.inhaled.connect(_on_inhaled)
-	out_of_oxygen.connect(func(): print("you died"))
 
 func _on_exhaled() -> void:
 	rate_oxygen_sanity_depletion = sanity_controller.get_oxygen_depletion_by_sanity()
