@@ -46,6 +46,7 @@ background_color = Color(0, 0, 0.0627451, 1)
 sky = SubResource("Sky_ro5b7")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
 fog_light_color = Color(0.012193847, 0.09690831, 0.23460221, 1)
 fog_light_energy = 0.4
 fog_density = 0.08
