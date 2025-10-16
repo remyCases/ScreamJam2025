@@ -1,5 +1,6 @@
-[gd_scene load_steps=42 format=3 uid="uid://sufrrjeq0dml"]
+[gd_scene load_steps=43 format=3 uid="uid://sufrrjeq0dml"]
 
+[ext_resource type="Script" uid="uid://bjini1vaq3puw" path="res://Scripts/game_controller.gd" id="1_ma2ka"]
 [ext_resource type="PackedScene" uid="uid://b67iksg05so0w" path="res://Scenes/PlayerController.tscn" id="1_mb4yd"]
 [ext_resource type="Shader" uid="uid://ilmbg5t4h1iu" path="res://Shaders/PSX.gdshader" id="1_r0dvh"]
 [ext_resource type="Texture2D" uid="uid://bjp5bj87cqen5" path="res://Assets/Textures/Ground016/Ground016_alb_ht.dds" id="2_b4i3f"]
@@ -168,6 +169,7 @@ mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_2vwkk")])
 texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_2vwkk"), SubResource("Terrain3DTextureAsset_b4i3f"), SubResource("Terrain3DTextureAsset_tgweh"), SubResource("Terrain3DTextureAsset_t3n7s"), SubResource("Terrain3DTextureAsset_8pmln")])
 
 [node name="Zone1" type="Node3D"]
+script = ExtResource("1_ma2ka")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_8pmln")
@@ -196,10 +198,6 @@ light_energy = 0.4
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 editor_only = true
-
-[node name="PlayerController" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_mb4yd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 129.85263, 8.798171, -128.07367)
-maximal_distance_anchor = 64.0
 
 [node name="Terrain3D" type="Terrain3D" parent="SubViewportContainer/SubViewport"]
 data_directory = "res://TerrainData"
@@ -393,41 +391,45 @@ cable_mesh = ExtResource("21_qp1ui")
 
 [node name="Collectibles" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="Collectible1" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles"]
+[node name="CollectibleDetector1" parent="SubViewportContainer/SubViewport/Collectibles" instance=ExtResource("22_qp1ui")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.01874, 5.850998, -111.81357)
-size = Vector3(1, 1.0860596, 1)
-
-[node name="CollectibleDetector" parent="SubViewportContainer/SubViewport/Collectibles/Collectible1" instance=ExtResource("22_qp1ui")]
 outer_radius = 15.0
 middle_radius = 5.0
 inner_radius = 1.0
 
-[node name="Collectible2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.499855, 5.6424556, -117.89679)
+[node name="placeholder" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles/CollectibleDetector1"]
 size = Vector3(1, 1.0860596, 1)
 
-[node name="CollectibleDetector" parent="SubViewportContainer/SubViewport/Collectibles/Collectible2" instance=ExtResource("22_qp1ui")]
-outer_radius = 15.0
-middle_radius = 5.0
-inner_radius = 1.0
-
-[node name="Collectible3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.608624, 4.91439, -109.98864)
-size = Vector3(1, 1.0860596, 1)
-
-[node name="CollectibleDetector" parent="SubViewportContainer/SubViewport/Collectibles/Collectible3" instance=ExtResource("22_qp1ui")]
-outer_radius = 15.0
-middle_radius = 5.0
-inner_radius = 1.0
-
-[node name="Collectible4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles"]
+[node name="CollectibleDetector2" parent="SubViewportContainer/SubViewport/Collectibles" instance=ExtResource("22_qp1ui")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.12773, 2.2424812, -90.8119)
-size = Vector3(1, 1.0860596, 1)
-
-[node name="CollectibleDetector" parent="SubViewportContainer/SubViewport/Collectibles/Collectible4" instance=ExtResource("22_qp1ui")]
 outer_radius = 15.0
 middle_radius = 5.0
 inner_radius = 1.0
+
+[node name="placeholder" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles/CollectibleDetector2"]
+size = Vector3(1, 1.0860596, 1)
+
+[node name="CollectibleDetector3" parent="SubViewportContainer/SubViewport/Collectibles" instance=ExtResource("22_qp1ui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.608624, 4.91439, -109.98864)
+outer_radius = 15.0
+middle_radius = 5.0
+inner_radius = 1.0
+
+[node name="placeholder" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles/CollectibleDetector3"]
+size = Vector3(1, 1.0860596, 1)
+
+[node name="CollectibleDetector4" parent="SubViewportContainer/SubViewport/Collectibles" instance=ExtResource("22_qp1ui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.499855, 5.6424556, -117.89679)
+outer_radius = 15.0
+middle_radius = 5.0
+inner_radius = 1.0
+
+[node name="placeholder" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Collectibles/CollectibleDetector4"]
+size = Vector3(1, 1.0860596, 1)
+
+[node name="PlayerController" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_mb4yd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 129.85263, 8.798171, -128.07367)
+maximal_distance_anchor = 64.0
 
 [node name="FpsCounter" parent="SubViewportContainer" instance=ExtResource("20_8pmln")]
 
