@@ -1,16 +1,16 @@
 [gd_scene load_steps=14 format=3 uid="uid://b67iksg05so0w"]
 
-[ext_resource type="Script" uid="uid://bdfntnma5mxf5" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
-[ext_resource type="Script" uid="uid://b1f4kkusvq1v8" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
+[ext_resource type="Script" uid="uid://dhn6t431rxm8v" path="res://Scripts/player_controller.gd" id="1_3dbmw"]
+[ext_resource type="Script" uid="uid://cg41aavmxdf5g" path="res://Scripts/oxygen_controller.gd" id="2_eplni"]
 [ext_resource type="AudioStream" uid="uid://4vjqlohplpf1" path="res://Sound/flashlight_on.mp3" id="2_s1vvi"]
-[ext_resource type="Script" uid="uid://cocxcfa4bhxf" path="res://Scripts/sanity_controller.gd" id="3_crrsd"]
+[ext_resource type="Script" uid="uid://c5vqm7o0vh6ls" path="res://Scripts/sanity_controller.gd" id="3_crrsd"]
 [ext_resource type="AudioStream" uid="uid://chbego8uq144g" path="res://Sound/flashlight_off.mp3" id="3_irtnh"]
-[ext_resource type="Script" uid="uid://bvuywqmmp4yoi" path="res://Scripts/bubble_spawner.gd" id="3_rrwoe"]
+[ext_resource type="Script" uid="uid://bi5etlafjjjoe" path="res://Scripts/bubble_spawner.gd" id="3_rrwoe"]
 [ext_resource type="AudioStream" uid="uid://cmmdyggv10j36" path="res://Sound/heavy-walking-footsteps-352771.mp3" id="4_irtnh"]
 [ext_resource type="AudioStream" uid="uid://d2u37b3dgvymd" path="res://Sound/mask_breath_in.mp3" id="4_n0rdu"]
 [ext_resource type="AudioStream" uid="uid://cbhd83c3r1bhs" path="res://Sound/underwater-ambiencewav-14428.mp3" id="5_a8u7r"]
 [ext_resource type="AudioStream" uid="uid://b2o3m340go4w4" path="res://Sound/mask_breath_out.mp3" id="5_e25u2"]
-[ext_resource type="Script" uid="uid://bkfpjnulftim1" path="res://Scripts/state_machine_breathing.gd" id="5_eucub"]
+[ext_resource type="Script" uid="uid://cujalxvx2xp7c" path="res://Scripts/state_machine_breathing.gd" id="5_eucub"]
 [ext_resource type="Texture2D" uid="uid://d3rbf48hv75yk" path="res://Assets/overlay.png" id="11_rt8ni"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eplni"]
@@ -21,9 +21,10 @@ breathing_animation_amplitude = 0.005
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_eplni")
+debug_color = Color(0.11764706, 0.85490197, 0.7254902, 1)
 
 [node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5548068, 0)
+transform = Transform3D(0.9999633, 0, -0.008569461, 0, 1, 0, 0.008569461, 0, 0.9999633, 0, 0.5548068, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 

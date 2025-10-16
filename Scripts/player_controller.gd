@@ -62,6 +62,7 @@ var is_moving: bool = false
 var momentum_velocity: Vector3 = Vector3.ZERO
 var sway_velocity: Vector2 = Vector2.ZERO
 var original_camera_pos: Vector3
+var initial_rotation: float = 0.0
 
 func _ready() -> void:
 	collision_layer = 0b00000000_00000000_00000000_00000001
@@ -74,6 +75,9 @@ func _ready() -> void:
 	
 	# Store original camera position for bobbing
 	original_camera_pos = camera.position
+
+	# Store initial rotation
+	initial_rotation = rotation.y
 
 	# send velocity message for bubbles
 	var velocity_timer: Timer = Timer.new()
@@ -139,7 +143,7 @@ func _handle_mouse_look(delta: float) -> void:
 	
 	# Apply rotations
 	camera_pivot.rotation.x = camera_rotation.x
-	rotation.y = camera_rotation.y
+	rotation.y = camera_rotation.y + initial_rotation
 	
 	# Add slight sway from rotation (helmet inertia)
 	var sway_target = Vector2(smoothed_mouse_delta.x * camera_sway_amount, smoothed_mouse_delta.y * camera_sway_amount)

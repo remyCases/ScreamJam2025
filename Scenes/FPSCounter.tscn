@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://buduq4adhxuy5"]
 
-[ext_resource type="Script" uid="uid://c10ahmgbplc3e" path="res://Scripts/fps_manager.gd" id="1_xa1po"]
+[ext_resource type="Script" uid="uid://cbhhea17ka2cp" path="res://Scripts/fps_manager.gd" id="1_xa1po"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xa1po"]
 outline_size = 4
