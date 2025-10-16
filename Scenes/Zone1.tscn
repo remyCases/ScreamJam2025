@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bqhe30t6inxa2" path="res://Assets/Textures/Shells01/shells01_nrm_rgh.dds" id="11_r0dvh"]
 [ext_resource type="PackedScene" uid="uid://cd4jvfcjw6s3q" path="res://Assets/Rock/mossy_rock.glb" id="12_h0tm8"]
 [ext_resource type="PackedScene" uid="uid://d1jwk13vstmf8" path="res://Assets/Algae/Algae_01/claret_tall_seaweed.glb" id="12_t3n7s"]
-[ext_resource type="PackedScene" uid="uid://buduq4adhxuy5" path="res://Scenes/FPSCounter.tscn" id="20_8pmln"]
+[ext_resource type="PackedScene" uid="uid://buduq4adhxuy5" path="res://Scenes/UI_for_text.tscn" id="20_8pmln"]
 [ext_resource type="PackedScene" uid="uid://dpnia7pnlgqet" path="res://Scenes/PseudoPhysicsCable.tscn" id="20_ciyxo"]
 [ext_resource type="PackedScene" uid="uid://bdvp4wkarmsuv" path="res://Scenes/CableSegment.tscn" id="21_qp1ui"]
 [ext_resource type="PackedScene" uid="uid://cjp7mmpx6jscj" path="res://Scenes/CollectibleDetector.tscn" id="22_qp1ui"]
