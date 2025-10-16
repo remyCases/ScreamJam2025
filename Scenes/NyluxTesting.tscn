@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bj678oukfggp8" path="res://Assets/Textures/grass_6.png" id="1_h702o"]
 [ext_resource type="PackedScene" uid="uid://b67iksg05so0w" path="res://Scenes/PlayerController.tscn" id="1_yggig"]
-[ext_resource type="PackedScene" uid="uid://buduq4adhxuy5" path="res://Scenes/FPSCounter.tscn" id="3_ll5sv"]
+[ext_resource type="PackedScene" uid="uid://buduq4adhxuy5" path="res://Scenes/UI_for_text.tscn" id="3_ll5sv"]
 [ext_resource type="PackedScene" uid="uid://dpnia7pnlgqet" path="res://Scenes/PseudoPhysicsCable.tscn" id="4_dg07d"]
 [ext_resource type="PackedScene" uid="uid://bdvp4wkarmsuv" path="res://Scenes/CableSegment.tscn" id="5_0kod5"]
 
