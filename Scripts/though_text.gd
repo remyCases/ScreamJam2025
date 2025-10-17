@@ -24,25 +24,25 @@ func _process_state() -> void:
 		Event.EVENT.START:
 			text = "I should find some clues about the shipwreck around me."
 		Event.EVENT.NO_CLUE_FOUND:
-			text = "If I get closer to a debris, my metal detector will beep."
+			text = "If I get closer to debris, my metal detector will beep."
 		Event.EVENT.CLUE_FOUND:
-			text = "I found something, I should bring it to the bell for later analysis."
+			text = "I found something, I should bring it to the bell for analysis later."
 		Event.EVENT.ALL_CLUE_FOUND:
-			text = "I found something, I should bring it to the bell for later analysis."
+			text = "I think I've got everything. I should head back to the bell."
 		Event.EVENT.CABLE_CUT:
-			text = "I found something, I should bring it to the bell for later analysis."
+			text = "What the... My cable has been cut! I need to leave right now !"
 		Event.EVENT.VICTORY:
-			text = "I found something, I should bring it to the bell for later analysis."
+			text = "You found all clues about the wreck's location. Your efforts allowed its recovery."
 		Event.EVENT.TOO_MUCH_FISH_AROUND:
-			text = "Fish"
+			text = "Fish 🐟"
 		Event.EVENT.HALF_OXYGEN:
-			text = "Fish"
+			text = "I'm running low on oxygen, should return to the bell to refill."
 		Event.EVENT.ALMOST_NO_OXYGEN:
-			text = "Fish"
+			text = "Almost.... No... Air... Must... Refill... at bell..."
 		Event.EVENT.BELL_REFILLED_OXYGEN:
-			text = "Fish"
+			text = "Grabbed a fresh bottle of oxygen. Let's go back to the search."
 		Event.EVENT.DYING:
-			text = "Fish"
+			text = "You drowned before you could reach the bell."
 	play_animation_text_display()
 
 func _on_decay_timer_timeout() -> void:
