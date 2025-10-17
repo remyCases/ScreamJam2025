@@ -14,6 +14,9 @@ var game_ended_timer: Timer
 
 var player: CharacterBody3D
 @onready var bell: Node3D = $SubViewportContainer/SubViewport/Bell
+@onready var menu_camera: Camera3D = $SubViewportContainer/SubViewport/CameraMenu
+@onready var main_menu: VBoxContainer = $MainMenu
+@onready var terrain: Terrain3D = $SubViewportContainer/SubViewport/Terrain3D
 var cable: Node3D
 
 func _ready() -> void:
@@ -50,16 +53,16 @@ func _ready() -> void:
 	game_ended_timer.timeout.connect(_on_game_ended_timer_timeout)
 	game_ended.connect(_on_game_ended)
 	
-	$SubViewportContainer/SubViewport/Terrain3D.set_camera($SubViewportContainer/CameraMenu)
-	
-	$MainMenu/MarginStart/Start.pressed.connect(_on_game_start)
+	terrain.set_camera(menu_camera)
+	main_menu.get_node("MarginStart/Start").pressed.connect(_on_game_start)
+	main_menu.get_node("MarginQuit/Quit").pressed.connect(func(): get_tree().quit())
 
 func _on_game_start() -> void:
-	$SubViewportContainer/CameraMenu.current = false
-	$MainMenu.visible = false
+	menu_camera.current = false
+	main_menu.visible = false
 
 	player = load("res://Scenes/PlayerController.tscn").instantiate()
-	player.position = Vector3(128.2, 7.954, -121.3)
+	player.position = Vector3(133.818, 8.948, -119.89)
 	player.initial_rotation = 156.0
 	player.vertical_look_limit = 40.0
 	player.maximal_distance_anchor = 80.0
@@ -76,8 +79,11 @@ func _on_game_start() -> void:
 
 	get_node("SubViewportContainer/SubViewport").add_child(cable)
 	
-	$SubViewportContainer/SubViewport/Terrain3D.set_camera(player.get_node("CameraPivot/Camera3D"))
+	var player_camera: Camera3D = player.get_node("CameraPivot/Camera3D")
+	terrain.set_camera(player_camera)
+	player_camera.current = true
 	no_clue_timer.start(no_clue_event_delay)
+	menu_camera.queue_free()
 	
 func _on_no_clue_timer_timeout() -> void:
 	EventBus.event_fired.emit(Event.EVENT.NO_CLUE_FOUND)
