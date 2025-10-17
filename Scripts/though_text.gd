@@ -4,7 +4,7 @@ var current_state: Event.EVENT = Event.EVENT.START
 var decay_timer: Timer
 @export var decay_time: float = 10.0
 var cooldown_out_of_bounds_timer: Timer
-var cooldown_out_of_bounds_flag: bool = false
+var cooldown_animation: bool = false
 @export var cooldown_out_of_bounds_time: float = 30.0
 
 var animation: AnimationPlayer
@@ -26,6 +26,9 @@ func _ready() -> void:
 	
 	animation = $AnimationPlayer
 	animation.animation_finished.connect(_on_animation_finished)
+	text = ""
+
+func _on_game_start() -> void:
 	_process_state()
 
 func _process_state() -> void:
@@ -52,13 +55,16 @@ func _process_state() -> void:
 			text = "Grabbed a fresh bottle of oxygen. Let's go back to the search."
 		Event.EVENT.DYING:
 			text = "You drowned before you could reach the bell."
-		Event.EVENT.OUT_OF_BOUNDS:
-			if !cooldown_out_of_bounds_flag:
-				text = "I should not go that far of the bell, I will get lost."
-				cooldown_out_of_bounds_timer.start(cooldown_out_of_bounds_time)
-				cooldown_out_of_bounds_flag = true
-				
-	play_animation_text_display()
+
+	if current_state == Event.EVENT.OUT_OF_BOUNDS:
+		text = "I should not go that far of the bell, I will get lost."
+		cooldown_out_of_bounds_timer.start(cooldown_out_of_bounds_time)
+		if !cooldown_animation:
+			play_animation_text_display()
+			cooldown_animation = true
+	else:
+		play_animation_text_display()
+		
 
 func _on_decay_timer_timeout() -> void:
 	animation.play("decay")
@@ -79,4 +85,4 @@ func _on_event_fired(event: Event.EVENT) -> void:
 	_process_state()
 
 func _on_cooldown_out_of_bounds_timeout() -> void:
-	cooldown_out_of_bounds_flag = false
+	cooldown_animation = false

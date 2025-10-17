@@ -9,6 +9,7 @@ signal velocity_updated
 @export var friction: float = 3.0  # Water resistance
 @export var gravity: float = 4.0  # Reduced gravity underwater
 @export var buoyancy: float = 0.5  # Slight upward force
+@export var initial_rotation: float = 0.0
 
 # Mouse Settings
 @export_group("Camera")
@@ -63,7 +64,6 @@ var is_moving: bool = false
 var momentum_velocity: Vector3 = Vector3.ZERO
 var sway_velocity: Vector2 = Vector2.ZERO
 var original_camera_pos: Vector3
-var initial_rotation: float = 0.0
 
 func _ready() -> void:
 	collision_layer = 0b00000000_00000000_00000000_00000001
@@ -76,9 +76,6 @@ func _ready() -> void:
 	
 	# Store original camera position for bobbing
 	original_camera_pos = camera.position
-
-	# Store initial rotation
-	initial_rotation = rotation.y
 
 	# send velocity message for bubbles
 	var velocity_timer: Timer = Timer.new()

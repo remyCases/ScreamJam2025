@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="ScreamJam2025"
+config/name="Deep In The Sea"
 run/main_scene="uid://sufrrjeq0dml"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://Assets/icon.svg"
+config/icon="uid://tso3b0tpenw2"
 
 [autoload]
 
