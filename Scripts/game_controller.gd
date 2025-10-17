@@ -23,6 +23,8 @@ func _ready() -> void:
 			collectible.collectible_picked_up.connect(_on_collectible_picked_up)
 
 	# handles end of game
+	player.player_half_oxygen.connect(_on_player_half_oxygen)
+	player.player_almost_no_oxygen.connect(_on_player_almost_no_oxygen)
 	player.player_out_of_oxygen.connect(_on_player_out_of_oxygen)
 	game_ended_timer = Timer.new()
 	add_child(game_ended_timer)
@@ -32,8 +34,14 @@ func _ready() -> void:
 
 func _on_collectible_picked_up() -> void:
 	collectible_picked += 1
-	event_fired.emit(Event.EVENT.CLUE_FOUND)
 	if collectible_picked >= collectibles_size:
+		event_fired.emit(Event.EVENT.ALL_CLUE_FOUND)
+	else:
+		event_fired.emit(Event.EVENT.CLUE_FOUND)
+
+func _on_close_to_bell() -> void:
+	if collectible_picked >= collectibles_size:
+		event_fired.emit(Event.EVENT.VICTORY)
 		game_ended_timer.start(game_ended_delay)
 
 func _on_game_ended() -> void:
@@ -42,7 +50,14 @@ func _on_game_ended() -> void:
 	## TODO: add the correct scene
 	get_tree().change_scene_to_file("res://Scenes/NyluxTesting.tscn")
 
+func _on_player_half_oxygen() -> void:
+	event_fired.emit(Event.EVENT.HALF_OXYGEN)
+
+func _on_player_almost_no_oxygen() -> void:
+	event_fired.emit(Event.EVENT.ALMOST_NO_OXYGEN)
+
 func _on_player_out_of_oxygen() -> void:
+	event_fired.emit(Event.EVENT.DYING)
 	game_ended_timer.start(game_ended_delay)
 
 func _on_game_ended_timer_timeout() -> void:

@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 signal velocity_updated
+signal player_half_oxygen
+signal player_almost_no_oxygen
 signal player_out_of_oxygen
 
 # Movement Settings
@@ -93,6 +95,8 @@ func _ready() -> void:
 	breathing_controller.inhaled.connect(_on_inhaled)
 	
 	# handle game over
+	oxygen_controller.half_oxygen.connect(_on_player_half_oxygen)
+	oxygen_controller.almost_no_oxygen.connect(_on_player_almost_no_oxygen)
 	oxygen_controller.out_of_oxygen.connect(_on_player_out_of_oxygen)
 
 func _input(event: InputEvent) -> void:
@@ -273,6 +277,12 @@ func _get_vision_basis() -> Basis:
 
 func _get_vision_position() -> Vector3:
 	return position + camera_pivot.position
+
+func _on_player_half_oxygen() -> void:
+	player_half_oxygen.emit()
+
+func _on_player_almost_no_oxygen() -> void:
+	player_almost_no_oxygen.emit()
 
 func _on_player_out_of_oxygen() -> void:
 	player_out_of_oxygen.emit()
