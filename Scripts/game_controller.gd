@@ -63,7 +63,8 @@ func _on_game_start() -> void:
 
 	player = load("res://Scenes/PlayerController.tscn").instantiate()
 	player.position = Vector3(133.818, 8.948, -119.89)
-	player.initial_rotation = 156.0
+	player.rotation_degrees = Vector3(0.0, 156.5, 0.0)
+
 	player.vertical_look_limit = 40.0
 	player.maximal_distance_anchor = 80.0
 	player.anchor = bell

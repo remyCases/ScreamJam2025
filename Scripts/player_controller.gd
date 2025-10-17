@@ -9,7 +9,6 @@ signal velocity_updated
 @export var friction: float = 3.0  # Water resistance
 @export var gravity: float = 4.0  # Reduced gravity underwater
 @export var buoyancy: float = 0.5  # Slight upward force
-@export var initial_rotation: float = 0.0
 
 # Mouse Settings
 @export_group("Camera")
@@ -76,6 +75,7 @@ func _ready() -> void:
 	
 	# Store original camera position for bobbing
 	original_camera_pos = camera.position
+	camera_rotation.y = rotation.y
 
 	# send velocity message for bubbles
 	var velocity_timer: Timer = Timer.new()
@@ -139,7 +139,7 @@ func _handle_mouse_look(delta: float) -> void:
 	
 	# Apply rotations
 	camera_pivot.rotation.x = camera_rotation.x
-	rotation.y = camera_rotation.y + initial_rotation
+	rotation.y = camera_rotation.y
 	
 	# Add slight sway from rotation (helmet inertia)
 	var sway_target = Vector2(smoothed_mouse_delta.x * camera_sway_amount, smoothed_mouse_delta.y * camera_sway_amount)
