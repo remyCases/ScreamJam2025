@@ -7,11 +7,13 @@ signal event_fired
 
 var collectible_picked: int = 0
 var collectibles_size: int
-
-@onready var player: CharacterBody3D = $SubViewportContainer/SubViewport/PlayerController
+var no_clue_timer: Timer
 var game_ended_timer: Timer
 
+@export var no_clue_event_delay: float = 60.0
 @export var game_ended_delay: float = 5.0
+
+@onready var player: CharacterBody3D = $SubViewportContainer/SubViewport/PlayerController
 
 func _ready() -> void:
 	# collectibles
@@ -22,6 +24,13 @@ func _ready() -> void:
 		if collectible is CollectibleDetector:
 			collectible.collectible_picked_up.connect(_on_collectible_picked_up)
 
+	# handles no clue event
+	no_clue_timer = Timer.new()
+	add_child(no_clue_timer)
+	no_clue_timer.one_shot = true
+	no_clue_timer.timeout.connect(_on_no_clue_timer_timeout)
+	no_clue_timer.start(no_clue_event_delay)
+	
 	# handles end of game
 	player.player_half_oxygen.connect(_on_player_half_oxygen)
 	player.player_almost_no_oxygen.connect(_on_player_almost_no_oxygen)
@@ -32,8 +41,12 @@ func _ready() -> void:
 	game_ended_timer.timeout.connect(_on_game_ended_timer_timeout)
 	game_ended.connect(_on_game_ended)
 
+func _on_no_clue_timer_timeout() -> void:
+	event_fired.emit(Event.EVENT.NO_CLUE_FOUND)
+
 func _on_collectible_picked_up() -> void:
 	collectible_picked += 1
+	no_clue_timer.stop()
 	if collectible_picked >= collectibles_size:
 		event_fired.emit(Event.EVENT.ALL_CLUE_FOUND)
 	else:
