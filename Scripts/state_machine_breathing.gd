@@ -19,8 +19,6 @@ func _ready() -> void:
 	_timer.one_shot = true
 	add_child(_timer)
 	_timer.timeout.connect(_on_timer_timeout)
-	
-	_start_breathing()
 
 func _start_breathing() -> void:
 	if current_state != BREATHING.OFF:

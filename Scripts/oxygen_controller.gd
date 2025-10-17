@@ -46,7 +46,7 @@ func _on_inhaled() -> void:
 	breath_in_sound.play()
 
 func get_oxygen_level() -> int:
-	return min(max_oxygen_level, current_oxygen / 20.0)
+	return min(max_oxygen_level, current_oxygen / 20.0 + 1)
 
 func _on_infinite_oxygen_started() -> void:
 	current_oxygen = max_oxygen

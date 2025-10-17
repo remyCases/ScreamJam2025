@@ -87,6 +87,7 @@ func _ready() -> void:
 	# handle breathing animation
 	breathing_controller.exhaled.connect(_on_exhaled)
 	breathing_controller.inhaled.connect(_on_inhaled)
+	breathing_controller._start_breathing()
 
 func _input(event: InputEvent) -> void:
 	# Handle mouse input

@@ -17,6 +17,8 @@ var player: CharacterBody3D
 var cable: Node3D
 
 func _ready() -> void:
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# collectibles
 	var collectibles: Array[Node] = get_tree().get_nodes_in_group("Collectibles")
 	collectibles_size = collectibles.size()
@@ -120,9 +122,9 @@ func _on_bell_body_exited(body: Node3D) -> void:
 		EventBus.infinite_oxygen_ended.emit()
 
 func _on_cable_body_exited(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is CharacterBody3D and cable:
 		call_deferred("_cut_cable")
 		EventBus.event_fired.emit(Event.EVENT.CABLE_CUT)
-	
+
 func _cut_cable() -> void:
 	cable.queue_free()
