@@ -8,7 +8,7 @@ var animation: AnimationPlayer
 
 func _ready() -> void:
 	# connect all event
-	$/root/Zone1.event_fired.connect(_on_event_fired)
+	EventBus.event_fired.connect(_on_event_fired)
 	
 	# create timer for decay
 	decay_timer = Timer.new()
@@ -17,6 +17,7 @@ func _ready() -> void:
 	decay_timer.timeout.connect(_on_decay_timer_timeout)
 	
 	animation = $AnimationPlayer
+	animation.animation_finished.connect(_on_animation_finished)
 	_process_state()
 
 func _process_state() -> void:
@@ -30,7 +31,7 @@ func _process_state() -> void:
 		Event.EVENT.ALL_CLUE_FOUND:
 			text = "I think I've got everything. I should head back to the bell."
 		Event.EVENT.CABLE_CUT:
-			text = "What the... My cable has been cut! I need to leave right now !"
+			text = "What the... My cable has been cut! Finding the bell will be a nightmare !"
 		Event.EVENT.VICTORY:
 			text = "You found all clues about the wreck's location. Your efforts allowed its recovery."
 		Event.EVENT.TOO_MUCH_FISH_AROUND:
@@ -47,11 +48,14 @@ func _process_state() -> void:
 
 func _on_decay_timer_timeout() -> void:
 	animation.play("decay")
-	await animation.animation_finished
-	text = ""
-	visible_ratio = 0
 
+func _on_animation_finished(anim_name: String) -> void:
+	if anim_name == "decay":
+		text = ""
+		visible_ratio = 0
+		
 func play_animation_text_display():
+	animation.stop()
 	modulate.a = 255
 	animation.play("text_display")
 	decay_timer.start(decay_time)

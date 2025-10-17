@@ -1,0 +1,10 @@
+extends Node
+
+signal infinite_oxygen_started
+signal infinite_oxygen_ended
+
+signal player_half_oxygen
+signal player_almost_no_oxygen
+signal player_out_of_oxygen
+
+signal event_fired
