@@ -14,6 +14,7 @@ var game_ended_timer: Timer
 
 @onready var player: CharacterBody3D = $SubViewportContainer/SubViewport/PlayerController
 @onready var bell: Node3D = $SubViewportContainer/SubViewport/Bell
+@onready var cable: Node3D = $SubViewportContainer/SubViewport/PseudoPhysicsCable
 
 func _ready() -> void:
 	# collectibles
@@ -39,6 +40,7 @@ func _ready() -> void:
 	# handles bell events
 	bell.get_node("OxygenRefillArea").body_entered.connect(_on_bell_body_entered)
 	bell.get_node("OxygenRefillArea").body_exited.connect(_on_bell_body_exited)
+	bell.get_node("CableCutArea").body_exited.connect(_on_cable_body_exited)
 
 	# handles end of game
 	game_ended_timer = Timer.new()
@@ -89,3 +91,11 @@ func _on_bell_body_entered(body: Node3D) -> void:
 func _on_bell_body_exited(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		EventBus.infinite_oxygen_ended.emit()
+
+func _on_cable_body_exited(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		call_deferred("_cut_cable")
+		EventBus.event_fired.emit(Event.EVENT.CABLE_CUT)
+	
+func _cut_cable() -> void:
+	cable.queue_free()

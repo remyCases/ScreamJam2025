@@ -3,6 +3,9 @@ extends Label
 var current_state: Event.EVENT = Event.EVENT.START
 var decay_timer: Timer
 @export var decay_time: float = 10.0
+var cooldown_out_of_bounds_timer: Timer
+var cooldown_out_of_bounds_flag: bool = false
+@export var cooldown_out_of_bounds_time: float = 30.0
 
 var animation: AnimationPlayer
 
@@ -15,6 +18,11 @@ func _ready() -> void:
 	add_child(decay_timer)
 	decay_timer.one_shot = true
 	decay_timer.timeout.connect(_on_decay_timer_timeout)
+
+	cooldown_out_of_bounds_timer = Timer.new()
+	add_child(cooldown_out_of_bounds_timer)
+	cooldown_out_of_bounds_timer.one_shot = true
+	cooldown_out_of_bounds_timer.timeout.connect(_on_cooldown_out_of_bounds_timeout)
 	
 	animation = $AnimationPlayer
 	animation.animation_finished.connect(_on_animation_finished)
@@ -44,6 +52,12 @@ func _process_state() -> void:
 			text = "Grabbed a fresh bottle of oxygen. Let's go back to the search."
 		Event.EVENT.DYING:
 			text = "You drowned before you could reach the bell."
+		Event.EVENT.OUT_OF_BOUNDS:
+			if !cooldown_out_of_bounds_flag:
+				text = "I should not go that far of the bell, I will get lost."
+				cooldown_out_of_bounds_timer.start(cooldown_out_of_bounds_time)
+				cooldown_out_of_bounds_flag = true
+				
 	play_animation_text_display()
 
 func _on_decay_timer_timeout() -> void:
@@ -63,3 +77,6 @@ func play_animation_text_display():
 func _on_event_fired(event: Event.EVENT) -> void:
 	current_state = event
 	_process_state()
+
+func _on_cooldown_out_of_bounds_timeout() -> void:
+	cooldown_out_of_bounds_flag = false

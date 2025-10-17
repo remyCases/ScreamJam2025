@@ -176,6 +176,7 @@ func _handle_movement(delta: float) -> void:
 				var dot = direction.dot(normal_vector)
 
 				if dot + tolerance > 0:
+					EventBus.event_fired.emit(Event.EVENT.OUT_OF_BOUNDS)
 					# remove outward component and tangeantial movement with a set angle
 					direction = direction - normal_vector * (dot + tolerance)
 					direction.y = 0
