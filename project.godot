@@ -19,6 +19,7 @@ config/icon="res://Assets/icon.svg"
 
 GameVariables="*res://Scripts/game_variables.gd"
 Transition="*res://Scenes/Transition.tscn"
+Event="*res://Scripts/event.gd"
 
 [display]
 

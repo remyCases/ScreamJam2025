@@ -3,6 +3,7 @@ extends Node3D
 class_name game_controller
 
 signal game_ended
+signal event_fired
 
 var collectible_picked: int = 0
 var collectibles_size: int
@@ -31,6 +32,7 @@ func _ready() -> void:
 
 func _on_collectible_picked_up() -> void:
 	collectible_picked += 1
+	event_fired.emit(Event.EVENT.CLUE_FOUND)
 	if collectible_picked >= collectibles_size:
 		game_ended_timer.start(game_ended_delay)
 
