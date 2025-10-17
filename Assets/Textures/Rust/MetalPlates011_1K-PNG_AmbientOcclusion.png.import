@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctquapr2ys1w7"
 path.s3tc="res://.godot/imported/MetalPlates011_1K-PNG_AmbientOcclusion.png-87cc28db968c6eb937f8ace142f1a891.s3tc.ctex"
+path.etc2="res://.godot/imported/MetalPlates011_1K-PNG_AmbientOcclusion.png-87cc28db968c6eb937f8ace142f1a891.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Textures/Rust/MetalPlates011_1K-PNG_AmbientOcclusion.png"
-dest_files=["res://.godot/imported/MetalPlates011_1K-PNG_AmbientOcclusion.png-87cc28db968c6eb937f8ace142f1a891.s3tc.ctex"]
+dest_files=["res://.godot/imported/MetalPlates011_1K-PNG_AmbientOcclusion.png-87cc28db968c6eb937f8ace142f1a891.s3tc.ctex", "res://.godot/imported/MetalPlates011_1K-PNG_AmbientOcclusion.png-87cc28db968c6eb937f8ace142f1a891.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://1en7b4dvjc1m"
 path.s3tc="res://.godot/imported/low_poly_red_coral_1.png-8aef53769b4d9822a6e090d4d1f401a4.s3tc.ctex"
+path.etc2="res://.godot/imported/low_poly_red_coral_1.png-8aef53769b4d9822a6e090d4d1f401a4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Assets/Coral/Coral_01/low_poly_red_coral_1.png"
-dest_files=["res://.godot/imported/low_poly_red_coral_1.png-8aef53769b4d9822a6e090d4d1f401a4.s3tc.ctex"]
+dest_files=["res://.godot/imported/low_poly_red_coral_1.png-8aef53769b4d9822a6e090d4d1f401a4.s3tc.ctex", "res://.godot/imported/low_poly_red_coral_1.png-8aef53769b4d9822a6e090d4d1f401a4.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://krwxkim3welp"
 path.s3tc="res://.godot/imported/claret_tall_seaweed_1.png-445b8be1e8a4f2efc37262834e415c8f.s3tc.ctex"
+path.etc2="res://.godot/imported/claret_tall_seaweed_1.png-445b8be1e8a4f2efc37262834e415c8f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Assets/Algae/Algae_01/claret_tall_seaweed_1.png"
-dest_files=["res://.godot/imported/claret_tall_seaweed_1.png-445b8be1e8a4f2efc37262834e415c8f.s3tc.ctex"]
+dest_files=["res://.godot/imported/claret_tall_seaweed_1.png-445b8be1e8a4f2efc37262834e415c8f.s3tc.ctex", "res://.godot/imported/claret_tall_seaweed_1.png-445b8be1e8a4f2efc37262834e415c8f.etc2.ctex"]
 
 [params]
 
